@@ -4,7 +4,7 @@ const Button = ({ text }) => {
   return (
     <div>
       <div className="flex justify-center items-center">
-        <button className="flex justify-between items-center bg-[#EB1400] hover:bg-[#BA0000] text-white font-bold py-2 px-4 rounded-full">
+        <button className="flex justify-between items-center bg-[#EB1400] hover:bg-[#BA0000] text-white font-bold py-2 px-4 cursor-pointer rounded-full">
           <i className="mr-2 bg-white rounded-full p-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"

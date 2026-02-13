@@ -2,11 +2,16 @@
   background-color: var(--white-color);
   padding: 1rem 0;
 }
-.container {
+.topBarContainer {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  padding: 1rem 0;
+}
+.container { 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: 0 2rem;
 }
   
 .logo { 
@@ -31,6 +36,7 @@
   align-items: center;
   flex-direction: row-reverse;
   position: relative;
+  color: var(--black-color);
 }
 
 .hasMega:hover .megaMenu {
@@ -88,4 +94,8 @@
   width: 1.5em;    
   height: 1.5rem;
   stroke: var(--black-color);
+}
+
+.iconWith svg {
+  color: var(--primary-color);
 }
