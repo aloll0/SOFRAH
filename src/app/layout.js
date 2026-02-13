@@ -1,7 +1,6 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import Header from "../app/components/Header/Header";
-import Hero from "../app/components/Hero/Hero";
+import "react-phone-number-input/style.css";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -18,13 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${outfit.variable} antialiased`}
-      >
-        <Header />
-        <Hero />
-        {children}
-      </body>
+      <body className={`${outfit.variable} antialiased`}>{children}</body>
     </html>
   );
 }

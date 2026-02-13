@@ -1,12 +1,24 @@
 import Image from "next/image";
-import style from "./Header.module.css";
 import Link from "next/link";
+import style from "./Header.module.css";
 
 const navLinks = [
-  { name: "اتصل بنا", href: "/contact" },
-  { name: "عن الشركة", href: "/about" },
-  { name: "المدونة", href: "/blog" },
-  { name: "الأطباق الرئيسية", href: "/menu" },
+  { 
+    name: "اتصل بنا", 
+    href: "/contact" 
+  },
+  { 
+    name: "عن الشركة", 
+    href: "/about" 
+  },
+  { 
+    name: "المدونة", 
+    href: "/blog" 
+  },
+  { 
+    name: "الأطباق الرئيسية", 
+    href: "/menu" 
+  },
   {
     name: "الرئيسية",
     className: `hasMega ${style.hasMega}`,
@@ -24,6 +36,7 @@ const navLinks = [
 const navIcons = [
   {
     name: "user",
+    href: "/login",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -40,10 +53,10 @@ const navIcons = [
         />
       </svg>
     ),
-    href: "#",
   },
   {
     name: "cart",
+    href: "#",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -60,10 +73,10 @@ const navIcons = [
         />
       </svg>
     ),
-    href: "#",
   },
   {
     name: "wishlist",
+    href: "#",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -80,10 +93,10 @@ const navIcons = [
         />
       </svg>
     ),
-    href: "#",
   },
   {
     name: "search",
+    href: "#",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -100,66 +113,175 @@ const navIcons = [
         />
       </svg>
     ),
-    href: "#",
   },
 ];
 
+const socialIcons = [
+  { name: "facebook", src: "/facebook.png" },
+  { name: "instagram", src: "/insta.png" },
+  { name: "whatsapp", src: "/whatsapp.png" },
+  { name: "snapchat", src: "/snapchat.png" },
+];
+
+const contactInfo = {
+  phone: "+201010428244",
+  email: "aloll0.dev@gmail.com",
+  emailHref: "mailto:aloll0.dev@gmail.com",
+  location: "مصر, المنصوره",
+};
+
 export default function Header() {
   return (
-    <section className={`Header ${style.section}`}>
-      <div className={`container ${style.container}`}>  
-        <div className={`icons ${style.icons}`}>
-          {navIcons.map((icon) => (
-            <Link key={icon.name} href={icon.href} className={style.iconLink}>
-              <div className={style.icon}>
-                {icon.svg}
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className={`nav ${style.nav_container}`}>
-          <ul className={`nav-list ${style.navList}`}>
-            {navLinks.map((link) => (
-              <li
-                key={link.name}
-                className={`${style.navItem} ${link.megaMenu ? style.hasMega : ""}`}
-              >
-                <Link href={link.href || "#"} className={style.navLink}>
-                  {link.name}
-                  {link.icon && (
-                    <Image
-                      src={link.icon}
-                      alt={`${link.name} icon`}
-                      width={12}
-                      height={12}
-                      className={style.navIcon}
-                    />
-                  )}
-                </Link>
+    <>
+      <div className={style.topBarContainer}>
+        <div className={`top-bar flex justify-between container ${style.topBar}`}>
+          <div className={`contact-info flex items-center ${style.contactInfo}`}>
+            <div className={`icon-with flex items-center gap-4 ${style.iconWith}`}>
+              {socialIcons.map((social) => (
+                <Image
+                  key={social.name}
+                  src={social.src}
+                  alt={social.name}
+                  width={24}
+                  height={24}
+                />
+              ))}
+            </div>
 
-                {link.megaMenu && (
-                  <div className={style.megaMenu}>
-                    {link.megaMenu.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className={style.megaItem}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={`image ${style.image}`}>
-          <Link href="/">
-            <Image src="/logo.png" alt="Header Image" width={155} height={75} />
-          </Link>
+            <span className="mx-4">|</span>
+
+            <div className={`icon-with flex items-center ${style.iconWith}`}>
+              <span>{contactInfo.phone}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div className={`contact-info flex items-center ${style.contactInfo}`}>
+            <div className={`icon-with flex items-center ${style.iconWith}`}>
+              <a href={contactInfo.emailHref}>
+                {contactInfo.email}
+              </a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                />
+              </svg>
+            </div>
+
+            <span className="mx-4">|</span>
+
+            <div className={`icon-with flex items-center ${style.iconWith}`}>
+              <span>{contactInfo.location}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+
+      <section className={`Header ${style.section}`}>
+        <div className={`container ${style.container}`}>
+          <div className={`icons ${style.icons}`}>
+            {navIcons.map((icon) => (
+              <Link 
+                key={icon.name} 
+                href={icon.href} 
+                className={style.iconLink}
+              >
+                <div className={style.icon}>{icon.svg}</div>
+              </Link>
+            ))}
+          </div>
+
+          <div className={`nav ${style.nav_container}`}>
+            <ul className={`nav-list ${style.navList}`}>
+              {navLinks.map((link) => (
+                <li
+                  key={link.name}
+                  className={`${style.navItem} ${link.megaMenu ? style.hasMega : ""}`}
+                >
+                  <Link href={link.href || "#"} className={style.navLink}>
+                    {link.name}
+                    {link.icon && (
+                      <Image
+                        src={link.icon}
+                        alt={`${link.name} icon`}
+                        width={12}
+                        height={12}
+                        className={style.navIcon}
+                      />
+                    )}
+                  </Link>
+
+                  {link.megaMenu && (
+                    <div className={style.megaMenu}>
+                      {link.megaMenu.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className={style.megaItem}
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={`image ${style.image}`}>
+            <Link href="/">
+              <Image
+                src="/logo.png"
+                alt="Header Image"
+                width={155}
+                height={75}
+              />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
