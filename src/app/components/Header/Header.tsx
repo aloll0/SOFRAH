@@ -17,18 +17,18 @@ const navLinks = [
   },
   { 
     name: "الأطباق الرئيسية", 
-    href: "/menu" 
+    href: "/store/products" 
   },
   {
     name: "الرئيسية",
     className: `hasMega ${style.hasMega}`,
-    href: "/",
+    href: "/store/home",
     icon: "/arrow.png",
     megaMenu: [
-      { name: "المقبلات", href: "/menu/appetizers" },
-      { name: "الأطباق", href: "/menu/main-courses" },
-      { name: "الحلويات", href: "/menu/desserts" },
-      { name: "المشروبات", href: "/menu/beverages" },
+      { name: "المقبلات", href: "/store/categories/appetizers" },
+      { name: "الأطباق", href: "/store/categories/mains" },
+      { name: "الحلويات", href: "/store/categories/desserts" },
+      { name: "المشروبات", href: "/store/categories/beverages" },
     ],
   },
 ];
@@ -36,7 +36,7 @@ const navLinks = [
 const navIcons = [
   {
     name: "user",
-    href: "/login",
+    href: "/store/profile",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +56,7 @@ const navIcons = [
   },
   {
     name: "cart",
-    href: "#",
+    href: "/store/cart",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@ const navIcons = [
   },
   {
     name: "wishlist",
-    href: "#",
+    href: "/store/wishlist",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@ const navIcons = [
   },
   {
     name: "search",
-    href: "#",
+    href: "/store/search",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
