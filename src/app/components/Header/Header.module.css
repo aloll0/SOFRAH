@@ -54,13 +54,28 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
-  transition: 0.3s ease;
+  transform: translateY(15px) scale(0.98);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0.3s;
+
   z-index: 999;
+}
+.hasMega:hover .megaMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.megaMenu {
+  backdrop-filter: blur(8px);
 }
 
 .megaItem {
@@ -74,7 +89,7 @@
   color: var(--primary-color); 
 }
 .icons {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   gap: 1rem;
@@ -98,4 +113,132 @@
 
 .iconWith svg {
   color: var(--primary-color);
+}
+
+.nav_container {
+  display: flex;
+}
+.menuToggle {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .nav_container {
+    display: none;
+  }
+  .menuToggle {
+    display: block;
+    cursor: pointer;
+  }
+  .section {
+    padding: 0;
+  }
+}
+@media (min-width: 1025px) {
+  .mobileMenu {
+    display: none;
+  }
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 260px;
+  height: 100vh;
+  background: var(--white-color);
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  z-index: 999;
+
+  transform: translateX(-100%);
+  opacity: 0;
+
+  transition:
+    transform 0.4s cubic-bezier(.4,0,.2,1),
+    opacity 0.3s ease;
+}
+.openMenu {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 998;
+}
+
+.showOverlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobileSubMenu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 15px;
+
+  transition: 
+    max-height 0.35s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+.openSub {
+  max-height: 300px; 
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 10px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobileLinkRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.arrowBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.arrow {
+  width: 20px;
+  transition: transform 0.3s ease;
+}
+.rotate {
+  transform: rotate(90deg);
+}
+.cont_link {
+  display: flex;
+  align-items: center;
+}
+.mobileLinkRow a {
+  font-size: 22px !important;
+  font-weight: bold;
 }
