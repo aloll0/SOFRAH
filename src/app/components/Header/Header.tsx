@@ -1,34 +1,36 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import style from "./Header.module.css";
 
 const navLinks = [
-  { 
-    name: "اتصل بنا", 
-    href: "/contact" 
+  {
+    name: "اتصل بنا",
+    href: "/contact",
   },
-  { 
-    name: "عن الشركة", 
-    href: "/about" 
+  {
+    name: "عن الشركة",
+    href: "/about",
   },
-  { 
-    name: "المدونة", 
-    href: "/blog" 
+  {
+    name: "المدونة",
+    href: "/blog",
   },
-  { 
-    name: "الأطباق الرئيسية", 
-    href: "/store/products" 
+  {
+    name: "الأطباق الرئيسية",
+    href: "/menu",
   },
   {
     name: "الرئيسية",
     className: `hasMega ${style.hasMega}`,
-    href: "/store/home",
+    href: "/",
     icon: "/arrow.png",
     megaMenu: [
-      { name: "المقبلات", href: "/store/categories/appetizers" },
-      { name: "الأطباق", href: "/store/categories/mains" },
-      { name: "الحلويات", href: "/store/categories/desserts" },
-      { name: "المشروبات", href: "/store/categories/beverages" },
+      { name: "المقبلات", href: "/menu/appetizers" },
+      { name: "الأطباق", href: "/menu/main-courses" },
+      { name: "الحلويات", href: "/menu/desserts" },
+      { name: "المشروبات", href: "/menu/beverages" },
     ],
   },
 ];
@@ -36,7 +38,7 @@ const navLinks = [
 const navIcons = [
   {
     name: "user",
-    href: "/store/profile",
+    href: "/login",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +58,7 @@ const navIcons = [
   },
   {
     name: "cart",
-    href: "/store/cart",
+    href: "#",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +78,7 @@ const navIcons = [
   },
   {
     name: "wishlist",
-    href: "/store/wishlist",
+    href: "#",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +98,7 @@ const navIcons = [
   },
   {
     name: "search",
-    href: "/store/search",
+    href: "#",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -131,12 +133,29 @@ const contactInfo = {
 };
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState(null);
+
+  const toggleSubMenu = (name) => {
+    setOpenSubMenu((prev) => (prev === name ? null : name));
+  };
+
   return (
     <>
+      <div
+        className={`${style.overlay} ${menuOpen ? style.showOverlay : ""}`}
+        onClick={() => setMenuOpen(false)}
+      />
       <div className={style.topBarContainer}>
-        <div className={`top-bar flex justify-between container ${style.topBar}`}>
-          <div className={`contact-info flex items-center ${style.contactInfo}`}>
-            <div className={`icon-with flex items-center gap-4 ${style.iconWith}`}>
+        <div
+          className={`top-bar flex justify-center md:justify-between container ${style.topBar}`}
+        >
+          <div
+            className={`contact-info md:flex items-center hidden ${style.contactInfo}`}
+          >
+            <div
+              className={`icon-with flex items-center gap-4 ${style.iconWith}`}
+            >
               {socialIcons.map((social) => (
                 <Image
                   key={social.name}
@@ -169,11 +188,11 @@ export default function Header() {
             </div>
           </div>
 
-          <div className={`contact-info flex items-center ${style.contactInfo}`}>
+          <div
+            className={`contact-info flex items-center ${style.contactInfo}`}
+          >
             <div className={`icon-with flex items-center ${style.iconWith}`}>
-              <a href={contactInfo.emailHref}>
-                {contactInfo.email}
-              </a>
+              <a href={contactInfo.emailHref}>{contactInfo.email}</a>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -220,13 +239,109 @@ export default function Header() {
 
       <section className={`Header ${style.section}`}>
         <div className={`container ${style.container}`}>
-          <div className={`icons ${style.icons}`}>
+          <button
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className={style.menuToggle}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-7"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </button>
+            <div
+              className={`${style.mobileMenu} ${
+                menuOpen ? style.openMenu : ""
+              }`}
+            >
+              <div className="close flex justify-between items-center w-full">
+                <Image
+                  src="/logoLogin.png"
+                  alt="Mobile Logo"
+                  width={120}
+                  height={65}
+                />
+                <div
+                  className="cancel cursor-pointer bg-red-600 p-2 text-white rounded-full"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18 18 6M6 6l12 12"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <hr />
+              <div className="cont_links flex flex-col-reverse gap-4">
+                {navLinks.map((link) => (
+                  <div key={link.name} className={style.mobileItem}>
+                    <div
+                      className={style.mobileLinkRow}
+                      onClick={() => toggleSubMenu(link.name)}
+                    >
+                      <Link href={link.href}>{link.name}</Link>
+
+                      {link.megaMenu && (
+                        <button className={style.arrowBtn}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className={`size-6 ${style.arrow} ${
+                              openSubMenu === link.name ? style.rotate : ""
+                            }`}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                            />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                    {link.megaMenu && (
+                      <div
+                        className={`${style.mobileSubMenu} ${
+                          openSubMenu === link.name ? style.openSub : ""
+                        }`}
+                      >
+                        {link.megaMenu.map((item) => (
+                          <Link key={item.name} href={item.href}>
+                            {item.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          <div className={`icons hidden lg:flex ${style.icons}`}>
             {navIcons.map((icon) => (
-              <Link 
-                key={icon.name} 
-                href={icon.href} 
-                className={style.iconLink}
-              >
+              <Link key={icon.name} href={icon.href} className={style.iconLink}>
                 <div className={style.icon}>{icon.svg}</div>
               </Link>
             ))}
@@ -273,7 +388,7 @@ export default function Header() {
           <div className={`image ${style.image}`}>
             <Link href="/">
               <Image
-                src="/logo.png"
+                src="/logoLogin.png"
                 alt="Header Image"
                 width={155}
                 height={75}
